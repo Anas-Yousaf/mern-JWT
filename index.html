@@ -755,4 +755,54 @@ app.post('/api/login', (req, res) => {
 // Middleware
 function auth(req, res, next) {
   try {
-    const token = req.headers.
+    const token = req.headers.authorization;
+    req.user = jwt.verify(token, SECRET);
+    next();
+  } catch {
+    res.status(401).json({ error: 'Invalid token' });
+  }
+}
+
+app.listen(3000);</div>
+
+            <h3>Project Structure</h3>
+            <div class="code-block">jwt-project/
+├── jwt-app.js
+├── package.json
+└── views/
+    ├── login.ejs
+    ├── register.ejs
+    ├── dashboard.ejs
+    └── profile.ejs</div>
+
+            <div class="highlight">
+                <h3>Exam Key Points for EJS</h3>
+                <ul>
+                    <li><strong>Install EJS:</strong> npm install ejs</li>
+                    <li><strong>Set view engine:</strong> app.set('view engine', 'ejs')</li>
+                    <li><strong>Create views folder:</strong> Store .ejs files in views/</li>
+                    <li><strong>Render templates:</strong> res.render('template', {data})</li>
+                    <li><strong>EJS syntax:</strong> &lt;%= variable %&gt; for output</li>
+                    <li><strong>Separate routes:</strong> Page routes (render) vs API routes (json)</li>
+                </ul>
+            </div>
+
+            <div class="note">
+                <h3>Quick EJS Setup Steps:</h3>
+                <ol>
+                    <li><strong>Install:</strong> npm install express ejs jsonwebtoken</li>
+                    <li><strong>Set engine:</strong> app.set('view engine', 'ejs')</li>
+                    <li><strong>Create views folder:</strong> mkdir views</li>
+                    <li><strong>Create .ejs files:</strong> login.ejs, dashboard.ejs</li>
+                    <li><strong>Add routes:</strong> app.get('/', (req, res) => res.render('login'))</li>
+                    <li><strong>Pass data:</strong> res.render('dashboard', { user: req.user })</li>
+                </ol>
+            </div>
+        </section>
+
+        <div class="footer">
+            <p>Notes created by <strong>Anas Mughal</strong></p>
+        </div>
+    </div>
+</body>
+</html>
